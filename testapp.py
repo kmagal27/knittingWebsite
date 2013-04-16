@@ -12,8 +12,14 @@ class MainPage(webapp2.RequestHandler):
             </head>
             <body>
               <form action="/sign" method="post">
+                <div> Stitches per square inch (height): <input type="integer" name="height"/></div>
+                <div> Stitches per square inch (width): <input type="integer" name="width"/></div>
+                <div> Hips: <input type="integer" name="hips"/></div>
+                <div> Waist: <input type="integer" name="waist"/></div>
+                <div> Bust: <input type="integer" name="bust"/></div>
+                <div> Shoulder Width: <input type="integer" name="shoulder"/></div>
                 <div> Length: <input type="integer" name="length"/></div>
-                <div><input type="submit" value="Add 2"></div>
+                <div><input type="submit" value="Calculate"></div>
               </form>
             </body>
           </html>""")
