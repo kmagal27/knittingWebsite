@@ -49,13 +49,16 @@ class Sweater(webapp2.RequestHandler):
             size = 2
         elif strSize == 'l':
             size = 3
-        else strSize == 'xl':
+        else:
             size = 4
-        #data_uri = open('standard.png', 'rb').read().encode('base64').replace('\n', '')
-        #img_tag = '<img src="data:image/png;base64,{0}">'.format(data_uri)
-        #self.response.out.write(img_tag)
-        self.response.out.write('<html><body>You wrote:<pre>')
-        self.response.out.write(str(size))
+        data_uri = open('standard.png', 'rb').read().encode('base64').replace('\n', '')
+        img_tag = '<img src="data:image/png;base64,{0}">'.format(data_uri)
+        self.response.out.write(img_tag)
+        self.response.out.write('<html><body><pre>')
+        self.response.out.write('\na:')
+	self.response.out.write(armhole[size]+length2[size])
+	self.response.out.write('\nb:')
+	self.response.out.write(shoulder[size])
         self.response.out.write('</pre></body></html>')
 
 app = webapp2.WSGIApplication([('/', MainPage),
