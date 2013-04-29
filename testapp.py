@@ -18,12 +18,35 @@ class MainPage(webapp2.RequestHandler):
                 Length of yarn (yards): <input type="integer" name="gauge"/> <br />
                 <br />
                 Size: <br />
-                <input type="radio" name="size" value="xs" /> X-Small <br />
-                <input type="radio" name="size" value="s" /> Small <br />
-                <input type="radio" name="size" value="m" /> Medium <br />
-                <input type="radio" name="size" value="l" /> Large <br />
-                <input type="radio" name="size" value="xl" /> X-Large <br />
-                <br />
+		<table border = "1">
+		<tr>
+		<th>Children's</th>
+		<th>Women's</th>
+		<th>Men's</th>
+		</tr>
+		<td>
+		<input type="radio" name="size" value=0 /> X-Small <br />
+                <input type="radio" name="size" value=1 /> Small <br />
+                <input type="radio" name="size" value=2 /> Medium <br />
+                <input type="radio" name="size" value=3 /> Large <br />
+                <input type="radio" name="size" value=4 /> X-Large <br />
+		</td>
+		<td>
+		<input type="radio" name="size" value=5 /> X-Small <br />
+                <input type="radio" name="size" value=6 /> Small <br />
+                <input type="radio" name="size" value=7 /> Medium <br />
+                <input type="radio" name="size" value=8 /> Large <br />
+                <input type="radio" name="size" value=9 /> X-Large <br />
+		</td>
+		<td>
+		<input type="radio" name="size" value=10 /> X-Small <br />
+                <input type="radio" name="size" value=11 /> Small <br />
+                <input type="radio" name="size" value=12 /> Medium <br />
+                <input type="radio" name="size" value=13 /> Large <br />
+                <input type="radio" name="size" value=14 /> X-Large <br />
+		</td>
+		</table>
+		<br />
                 Shape: <br />
                 <input type="radio" name="shape" value="0" /> classic <br />
                 <br />
@@ -49,17 +72,18 @@ class Sweater(webapp2.RequestHandler):
         gHeight = int(form.getvalue('height'))
         gWidth = int(form.getvalue('width'))
         # set size
-        strSize = form.getvalue('size')
-        if strSize == 'xs':
-            size = 0
-        elif strSize == 's':
-            size = 1
-        elif strSize == 'm':
-            size = 2
-        elif strSize == 'l':
-            size = 3
-        else:
-            size = 4
+        #strSize = form.getvalue('size')
+        #if strSize == 'xs':
+        #    size = 0
+        #elif strSize == 's':
+        #    size = 1
+        #elif strSize == 'm':
+        #    size = 2
+        #elif strSize == 'l':
+        #    size = 3
+        #else:
+        #    size = 4
+	size = int(form.getvalue('size'))
         # shape (set picture)
         shape = int(form.getvalue('shape'))
         if shape == 0:
