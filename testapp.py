@@ -25,25 +25,28 @@ class MainPage(webapp2.RequestHandler):
 		<th>Men's</th>
 		</tr>
 		<td>
-		<input type="radio" name="size" value=0 /> X-Small <br />
-                <input type="radio" name="size" value=1 /> Small <br />
-                <input type="radio" name="size" value=2 /> Medium <br />
-                <input type="radio" name="size" value=3 /> Large <br />
-                <input type="radio" name="size" value=4 /> X-Large <br />
+		<input type="radio" name="size" value=0 /> 2 <br />
+                <input type="radio" name="size" value=1 /> 4 <br />
+                <input type="radio" name="size" value=2 /> 6 <br />
+                <input type="radio" name="size" value=3 /> 8 <br />
+                <input type="radio" name="size" value=4 /> 10 <br />
+                <input type="radio" name="size" value=5 /> 12 <br />
+                <input type="radio" name="size" value=6 /> 14 <br />
+                <input type="radio" name="size" value=7 /> 16 <br />
 		</td>
 		<td>
-		<input type="radio" name="size" value=5 /> X-Small <br />
-                <input type="radio" name="size" value=6 /> Small <br />
-                <input type="radio" name="size" value=7 /> Medium <br />
-                <input type="radio" name="size" value=8 /> Large <br />
-                <input type="radio" name="size" value=9 /> X-Large <br />
+		<input type="radio" name="size" value=8 /> X-Small <br />
+                <input type="radio" name="size" value=9 /> Small <br />
+                <input type="radio" name="size" value=10 /> Medium <br />
+                <input type="radio" name="size" value=11 /> Large <br />
+                <input type="radio" name="size" value=12 /> X-Large <br />
 		</td>
 		<td>
-		<input type="radio" name="size" value=10 /> X-Small <br />
-                <input type="radio" name="size" value=11 /> Small <br />
-                <input type="radio" name="size" value=12 /> Medium <br />
-                <input type="radio" name="size" value=13 /> Large <br />
-                <input type="radio" name="size" value=14 /> X-Large <br />
+                <input type="radio" name="size" value=13 /> Small <br />
+                <input type="radio" name="size" value=14 /> Medium <br />
+                <input type="radio" name="size" value=15 /> Large <br />
+                <input type="radio" name="size" value=16 /> X-Large <br />
+                <input type="radio" name="size" value=17 /> XX-Large <br />
 		</td>
 		</table>
 		<br />
@@ -57,32 +60,20 @@ class MainPage(webapp2.RequestHandler):
 
 class Sweater(webapp2.RequestHandler):
     def get(self):
-        bust = [29, 33, 37, 41, 45]
-        neckCuff = [27.5, 28.5, 29.5, 30.5, 31.5] #center back to neck cuff
-        length2 = [16.5, 17, 17.25, 17.5, 17.75] #back waist length
-        shoulder = [14.5, 15, 16.5, 17.5, 17.5] #cross back
-        sleeve = [16.5, 17, 17, 17.5, 17.5] #sleeve length to underarm (l + m)
-        arm = [9.75, 10.25, 11, 12, 13.5]
-        armhole = [6.5, 7, 7.5, 8, 8.5] #depth
-        waist = [23.5, 26, 29, 31, 37]
-        hips = [33.5, 35.5, 39, 43, 47]
-        wrist = [7, 7.5, 8, 8.5, 9]
+        bust = [21, 23, 25, 26.5, 28, 30, 31.5, 32.5, 29, 33, 37, 41, 45, 35, 39, 43, 47, 51]
+        neckCuff = [18, 19.5, 20.5, 22, 24, 26, 27, 28, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36.5] #center back to neck cuff
+        length2 = [8.5, 9.5, 10.5, 12.5, 14, 15, 15.5, 16, 16.5, 17, 17.25, 17.5, 17.75, 25.5, 26.75, 27.5, 27.75, 28.5] #back waist length
+        shoulder = [9.25, 9.75, 10.25, 10.75, 11.25, 12, 12.25, 13, 14.5, 15, 16.5, 17.5, 17.5, 16, 17, 18, 18.5, 19] #cross back
+        sleeve = [8.25, 10.5, 11.5, 12.5, 13.5, 15, 16, 16.5, 16.5, 17, 17, 17.5, 17.5, 18, 18.5, 19.5, 20, 20.5] #sleeve length to underarm (l + m)
+        arm = [7, 7.5, 8, 8.5, 8.75, 9, 9.25, 9.5, 9.75, 10.25, 11, 12, 13.5, 12, 13, 15, 16, 17]
+        armhole = [4.25, 4.75, 5, 5.5, 6, 6.5, 7, 7.5, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11] #depth
+        waist = [21, 21.5, 22.5, 23.5, 24.5, 25, 26.5, 27.5, 23.5, 26, 29, 31, 37, 29, 33, 37, 43, 47]
+        hips = [22, 23.5, 25, 28, 29.5, 31.5, 33, 35.5, 33.5, 35.5, 39, 43, 47, 36, 40, 44, 48, 52]
+        wrist = [4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 7, 7.5, 8, 8.5, 9, 8, 8.5, 9, 9.5, 10]
         form = cgi.FieldStorage()
         gauge = float(form.getvalue('gauge'))
         gHeight = int(form.getvalue('height'))
         gWidth = int(form.getvalue('width'))
-        # set size
-        #strSize = form.getvalue('size')
-        #if strSize == 'xs':
-        #    size = 0
-        #elif strSize == 's':
-        #    size = 1
-        #elif strSize == 'm':
-        #    size = 2
-        #elif strSize == 'l':
-        #    size = 3
-        #else:
-        #    size = 4
 	size = int(form.getvalue('size'))
         # shape (set picture)
         shape = int(form.getvalue('shape'))
@@ -204,7 +195,7 @@ class Sweater(webapp2.RequestHandler):
 	totalArea = float(sleeveArea + bodyArea)
 	yarn = totalArea * gauge
 	self.response.out.write('\n\nAmount of yarn needed: ')
-	self.response.out.write(yarn)
+	self.response.out.write(round(yarn, 2))
 	self.response.out.write(' yards')
         self.response.out.write('</pre></body></html>')
 
