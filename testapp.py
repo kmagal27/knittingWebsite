@@ -5,14 +5,18 @@ from google.appengine.api import users
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
+        title_pic = 'title.png'
+        data_uri = open(title_pic, 'rb').read().encode('base64').replace('\n', '')
+        title_tag = '<img src="data:image/png;base64,{0}">'.format(data_uri)
+        self.response.out.write(title_tag)
         self.response.out.write("""
           <html>
             <head>
-              <title> Knitting Page </title>
+              <title> Sweater Generator </title>
             </head>
             <body>
               <form action="/print" method="get">
-                Gauge Square:
+                Gauge Square: <br />
                 Stitches per square inch (height): <input type="integer" name="height"/> <br />
                 Stitches per square inch (width): <input type="integer" name="width"/> <br />
                 Length of yarn (yards): <input type="integer" name="gauge"/> <br />
@@ -60,6 +64,10 @@ class MainPage(webapp2.RequestHandler):
 
 class Sweater(webapp2.RequestHandler):
     def get(self):
+        title_pic = 'title.png'
+        data_uri = open(title_pic, 'rb').read().encode('base64').replace('\n', '')
+        title_tag = '<img src="data:image/png;base64,{0}">'.format(data_uri)
+        self.response.out.write(title_tag)
         bust = [21, 23, 25, 26.5, 28, 30, 31.5, 32.5, 29, 33, 37, 41, 45, 35, 39, 43, 47, 51]
         neckCuff = [18, 19.5, 20.5, 22, 24, 26, 27, 28, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36.5] #center back to neck cuff
         length2 = [8.5, 9.5, 10.5, 12.5, 14, 15, 15.5, 16, 16.5, 17, 17.25, 17.5, 17.75, 25.5, 26.75, 27.5, 27.75, 28.5] #back waist length
