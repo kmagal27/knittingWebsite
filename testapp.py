@@ -55,7 +55,8 @@ class MainPage(webapp2.RequestHandler):
 		</table>
 		<br />
                 Shape: <br />
-                <input type="radio" name="shape" value="0" /> classic <br />
+                <input type="radio" name="shape" value="0" /> Classic <br />
+                <input type="radio" name="shape" value="1" /> Double Taper <br />
                 <br />
                 <input type="submit" value="Calculate">
               </form>
@@ -87,6 +88,8 @@ class Sweater(webapp2.RequestHandler):
         shape = int(form.getvalue('shape'))
         if shape == 0:
             picture = 'classic.png'
+        elif shape == 1:
+            picture = 'double_taper.png'
         data_uri = open(picture, 'rb').read().encode('base64').replace('\n', '')
         img_tag = '<img src="data:image/png;base64,{0}">'.format(data_uri)
         self.response.out.write(img_tag)
@@ -105,29 +108,41 @@ class Sweater(webapp2.RequestHandler):
 	self.response.out.write(' inches (')
 	self.response.out.write(int(b * gWidth))
 	self.response.out.write(' stitches)')
-	
-	c = length2[size]
+
+	if shape == 0:
+            c = length2[size]
+        elif shape == 1:
+            c = round((length2[size] - 2)/2, 1)
 	self.response.out.write('\nC:')
 	self.response.out.write(c)
 	self.response.out.write(' inches (')
 	self.response.out.write(int(c * gHeight))
 	self.response.out.write(' stitches)')
-	
-	d = armhole[size]/2
+
+	if shape == 0:
+            d = armhole[size]/2
+        elif shape == 1:
+            d = c
 	self.response.out.write('\nD:')
 	self.response.out.write(d)
 	self.response.out.write(' inches (')
 	self.response.out.write(int(d * gHeight))
 	self.response.out.write(' stitches)')
-	
-	e = armhole[size]/4
+
+	if shape == 0:
+            e = armhole[size]/4
+        elif shape == 1:
+            e = round(armhole[size] * 2 / 3, 1)
 	self.response.out.write('\nE:')
 	self.response.out.write(e)
 	self.response.out.write(' inches (')
 	self.response.out.write(int(e * gHeight))
 	self.response.out.write(' stitches)')
-	
-	f = armhole[size]/4
+
+	if shape == 0:
+            f = armhole[size]/4
+        elif shape == 1:
+            f = round(armhole[size]/3, 1)
 	self.response.out.write('\nF:')
 	self.response.out.write(f)
 	self.response.out.write(' inches (')
@@ -162,22 +177,31 @@ class Sweater(webapp2.RequestHandler):
 	self.response.out.write(' inches (')
 	self.response.out.write(int(j * gHeight))
 	self.response.out.write(' stitches)')
-	
-	k = wrist[size]
+
+	if shape == 0:
+            k = wrist[size]
+        elif shape == 1:
+            k = wrist[size] + 4
 	self.response.out.write('\nK:')
 	self.response.out.write(k)
 	self.response.out.write(' inches (')
 	self.response.out.write(int(k * gWidth))
 	self.response.out.write(' stitches)')
-	
-	l = 2
+
+	if shape == 0:
+            l = 2
+        elif shape == 1:
+            l = round(sleeve[size] * .3, 1)
 	self.response.out.write('\nL:')
 	self.response.out.write(l)
 	self.response.out.write(' inches (')
 	self.response.out.write(int(l * gHeight))
 	self.response.out.write(' stitches)')
-	
-	m = sleeve[size] - l
+
+	if shape == 0:
+            m = sleeve[size] - l
+        elif shape == 1:
+            m = round(sleeve[size] * .4, 1)
 	self.response.out.write('\nM:')
 	self.response.out.write(m)
 	self.response.out.write(' inches (')
@@ -197,10 +221,50 @@ class Sweater(webapp2.RequestHandler):
 	self.response.out.write(' inches (')
 	self.response.out.write(int(o * gWidth))
 	self.response.out.write(' stitches)')
+
+	if shape == 1:
+            p = 2
+            self.response.out.write('\nP:')
+            self.response.out.write(p)
+            self.response.out.write(' inches (')
+            self.response.out.write(int(p * gHeight))
+            self.response.out.write(' stitches)')
 	
-	sleeveArea = (k*l + m*(o+k)/2 + n*(o+i)/2)*2
-	bodyArea = (b*c*2 + g*d + (e+f)*i*2 + g*(d+e) + i*f*2 + .2*g*d)
-	totalArea = float(sleeveArea + bodyArea)
+            q = wrist[size]
+            self.response.out.write('\nQ:')
+            self.response.out.write(q)
+            self.response.out.write(' inches (')
+            self.response.out.write(int(q * gWidth))
+            self.response.out.write(' stitches)')
+	
+            r = sleeve[size] - m - l
+            self.response.out.write('\nR:')
+            self.response.out.write(r)
+            self.response.out.write(' inches (')
+            self.response.out.write(int(r * gHeight))
+            self.response.out.write(' stitches)')
+	
+            s = b
+            self.response.out.write('\nS:')
+            self.response.out.write(s)
+            self.response.out.write(' inches (')
+            self.response.out.write(int(s * gWidth))
+            self.response.out.write(' stitches)')
+	
+            t = waist[size]
+            self.response.out.write('\nT:')
+            self.response.out.write(t)
+            self.response.out.write(' inches (')
+            self.response.out.write(int(t * gWidth))
+            self.response.out.write(' stitches)')
+
+	if shape == 0:
+            sleeveArea = (k*l + m*(o+k)/2 + n*(o+i)/2)*2
+            bodyArea = (b*c*2 + g*d + (e+f)*i*2 + g*(d+e) + i*f*2 + .2*g*d)
+        elif shape == 1:
+            sleeveArea = (q*r + m*(o+q)/2 + l*(q+k)/2 + n*(o+i)/2)*2
+            bodyArea = (p*b + c*(t+b)/2 + d*(t+s)/2)*2 + g*e + i*f*2 + (e+f)*g + .2*g*e
+        totalArea = float(sleeveArea + bodyArea)
 	yarn = totalArea * gauge
 	self.response.out.write('\n\nAmount of yarn needed: ')
 	self.response.out.write(round(yarn, 2))
