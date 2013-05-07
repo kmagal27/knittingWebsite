@@ -10,7 +10,13 @@ class MainPage(webapp2.RequestHandler):
         title_tag = '<img src="data:image/png;base64,{0}">'.format(data_uri)
         self.response.out.write(title_tag)
         self.response.out.write("""
-          <html>
+        <style>
+	   body{ font-family: verdana;
+		font-size: 18px;
+		font-color: #ff0000;
+		margin-left: 50px;}
+	</style>
+	 <html>
             <head>
               <title> Sweater Generator </title>
             </head>
@@ -189,6 +195,7 @@ class Sweater(webapp2.RequestHandler):
 	self.response.out.write(' stitches)')
 
 	if shape == 0:
+	    # TODO! make 1 inch for kids?
             l = 2
         elif shape == 1:
             l = round(sleeve[size] * .3, 1)
